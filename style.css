@@ -82,111 +82,108 @@ body {
     width: 100%;
 }
 
-/* Hero - 高级渐变背景 + 光效装饰 */
+/* Hero 区域核心样式 - 修复图片错位变形 */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    background: linear-gradient(135deg, #050508, #101020);
-    padding: 0 1rem;
     position: relative;
+    padding: 2rem 0;
     overflow: hidden;
-}
-
-/* 背景科技光效 */
-.hero-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        linear-gradient(45deg, transparent 48%, rgba(0, 204, 255, 0.03) 48%, rgba(0, 204, 255, 0.03) 52%, transparent 52%),
-        linear-gradient(135deg, transparent 48%, rgba(153, 51, 255, 0.03) 48%, rgba(153, 51, 255, 0.03) 52%, transparent 52%);
-    background-size: 40px 40px;
-    z-index: 0;
 }
 
 .hero-content {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 3rem;
-    max-width: 900px;
-    position: relative;
-    z-index: 1;
+    gap: 3rem; /* 增加证件照和文字的间距 */
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+    flex-wrap: wrap; /* 文字变长时自动换行，不挤压图片 */
 }
 
-/* 证件照 - 3D 悬浮 + 渐变边框 + 发光效果 */
+/* 证件照容器 - 固定比例+防止变形 */
 .profile-photo {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
+    width: 280px; /* 固定宽度，不受文字影响 */
+    height: 280px; /* 固定高度，保持正方形 */
+    border-radius: 50%; /* 圆形证件照（如需方形可改12px） */
     overflow: hidden;
     position: relative;
-    box-shadow: 
-        0 0 30px rgba(0, 204, 255, 0.4),
-        0 0 60px rgba(153, 51, 255, 0.2);
-    transition: transform 0.5s ease;
-}
-
-.profile-photo::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    border-radius: 50%;
-    background: linear-gradient(45deg, #00ccff, #9933ff);
-    z-index: -1;
-    animation: rotate 8s linear infinite;
-}
-
-.profile-photo:hover {
-    transform: translateY(-10px) scale(1.05);
+    border: 4px solid rgba(0, 204, 255, 0.3);
+    box-shadow: 0 0 30px rgba(0, 204, 255, 0.2),
+                inset 0 0 20px rgba(153, 51, 255, 0.1);
+    transform: perspective(800px) rotateY(5deg); /* 保留3D效果 */
+    transition: all 0.5s ease;
+    flex-shrink: 0; /* 关键：禁止图片被挤压缩小 */
 }
 
 .profile-photo img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
+    object-fit: cover; /* 核心：保持图片比例，不拉伸变形 */
+    object-position: center; /* 居中显示，裁剪多余部分 */
 }
 
-/* 旋转动画 */
-@keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+/* 鼠标悬浮效果（保留） */
+.profile-photo:hover {
+    transform: perspective(800px) rotateY(0deg) scale(1.05);
+    box-shadow: 0 0 40px rgba(0, 204, 255, 0.4);
 }
 
+/* Hero 文字区域 - 适配变长的文字 */
 .hero-text {
+    color: #fff;
     text-align: left;
+    flex: 1; /* 文字区域自动占剩余空间 */
+    min-width: 300px; /* 最小宽度，防止文字挤太窄 */
 }
 
 .hero-text h1 {
-    font-size: 3.2rem;
-    margin-bottom: 0.5rem;
-    color: #fff;
-    background: linear-gradient(90deg, #fff, #e0e0e0);
+    font-size: 3rem;
+    margin-bottom: 0.8rem;
+    background: linear-gradient(90deg, #00ccff, #9933ff);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
 
 .hero-text h2 {
-    font-size: 1.6rem;
-    background: linear-gradient(90deg, #00ccff, #9933ff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    font-size: 1.4rem; /* 适配变长的文字，调整字号 */
     margin-bottom: 1rem;
+    color: #e0e0e0;
+    line-height: 1.5; /* 增加行高，避免文字重叠 */
+}
+
+.hero-text p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #b0b0b0;
+    line-height: 1.6; /* 增加行高，提升可读性 */
+}
+
+/* 移动端适配（文字/图片自动堆叠） */
+@media (max-width: 768px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+    .hero-text {
+        text-align: center;
+        min-width: 100%;
+    }
+    .hero-text h1 {
+        font-size: 2.2rem;
+    }
+    .hero-text h2 {
+        font-size: 1.2rem;
+    }
+    .profile-photo {
+        width: 220px;
+        height: 220px;
+    }
 }
 
 /* 按钮 - 渐变 + 3D hover */
