@@ -149,11 +149,38 @@ body {
     color: transparent;
 }
 
+/* 新增：为指定文字添加渐变流光+闪烁特效 */
 .hero-text h2 {
     font-size: 1.4rem; /* 适配变长的文字，调整字号 */
     margin-bottom: 1rem;
-    color: #e0e0e0;
     line-height: 1.5; /* 增加行高，避免文字重叠 */
+    /* 核心特效：渐变文字 + 流光动画 */
+    background: linear-gradient(90deg, #00ccff, #9933ff, #00ccff);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: glowFlow 8s linear infinite, subtleFlicker 3s ease-in-out infinite;
+}
+
+/* 流光动画：渐变背景横向滚动 */
+@keyframes glowFlow {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 200% 0%;
+    }
+}
+
+/* 轻微闪烁动画：不刺眼的透明度变化 */
+@keyframes subtleFlicker {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.95;
+    }
 }
 
 .hero-text p {
@@ -179,6 +206,7 @@ body {
     }
     .hero-text h2 {
         font-size: 1.2rem;
+        animation: glowFlow 6s linear infinite, subtleFlicker 3s ease-in-out infinite;
     }
     .profile-photo {
         width: 220px;
