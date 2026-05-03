@@ -1,261 +1,180 @@
+/* ============================================
+   高级定制版 CSS - 基于你的HTML结构
+   保持所有原有class名称，只优化视觉效果
+   ============================================ */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Roboto, 'Inter', sans-serif;
-    scroll-behavior: smooth; /* 平滑滚动 */
 }
 
 body {
-    background-color: #050508;
-    color: #e0e0e0;
-    line-height: 1.7;
-    background-image: 
-        radial-gradient(circle at 20% 30%, rgba(0, 204, 255, 0.05) 0%, transparent 40%),
-        radial-gradient(circle at 80% 70%, rgba(100, 0, 255, 0.05) 0%, transparent 40%);
-    background-attachment: fixed;
+    background-color: #ffffff;
+    color: #1a1a1a;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    font-weight: 400;
 }
 
-/* Navbar - 玻璃拟态 + 渐变边框 */
+/* ========== 容器系统 ========== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* ========== 导航栏 ========== */
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(10, 10, 15, 0.85);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    padding: 1rem 0;
+    background: rgba(255, 255, 255, 0.96);
+    padding: 1.2rem 0;
     z-index: 999;
-    border-bottom: 1px solid rgba(0, 204, 255, 0.2);
+    border-bottom: 1px solid #eaeaea;
 }
 
 .nav-container {
-    width: 90%;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 0 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .logo {
-    font-size: 1.4rem;
-    font-weight: 700;
-    background: linear-gradient(90deg, #00ccff, #9933ff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    letter-spacing: 1px;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: #1a1a1a;
+    background: none;
 }
 
 .nav-menu {
     list-style: none;
     display: flex;
-    gap: 2rem;
+    gap: 2.5rem;
 }
 
 .nav-link {
-    color: #e0e0e0;
+    color: #555;
     text-decoration: none;
-    font-weight: 500;
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-/* 导航栏 hover 渐变下划线 */
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #00ccff, #9933ff);
-    transition: width 0.3s ease;
+    font-size: 0.85rem;
+    font-weight: 450;
+    letter-spacing: 0.3px;
+    transition: color 0.2s ease;
 }
 
 .nav-link:hover {
-    color: #00ccff;
+    color: #000;
 }
 
-.nav-link:hover::after {
-    width: 100%;
+.nav-link::after {
+    display: none;
 }
 
-/* Hero 区域核心样式 - 修复图片错位变形 */
+/* ========== Hero 区域 ========== */
 .hero {
-    min-height: 100vh;
+    min-height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    padding: 2rem 0;
-    overflow: hidden;
+    padding: 6rem 0 4rem;
 }
 
 .hero-content {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 3rem; /* 增加证件照和文字的间距 */
+    justify-content: space-between;
+    gap: 5rem;
     max-width: 1200px;
-    width: 90%;
     margin: 0 auto;
-    flex-wrap: wrap; /* 文字变长时自动换行，不挤压图片 */
+    padding: 0 2rem;
 }
 
-/* 证件照容器 - 固定比例+防止变形 */
 .profile-photo {
-    width: 280px; /* 固定宽度，不受文字影响 */
-    height: 280px; /* 固定高度，保持正方形 */
-    border-radius: 50%; /* 圆形证件照（如需方形可改12px） */
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
     overflow: hidden;
-    position: relative;
-    border: 4px solid rgba(0, 204, 255, 0.3);
-    box-shadow: 0 0 30px rgba(0, 204, 255, 0.2),
-                inset 0 0 20px rgba(153, 51, 255, 0.1);
-    transform: perspective(800px) rotateY(5deg); /* 保留3D效果 */
-    transition: all 0.5s ease;
-    flex-shrink: 0; /* 关键：禁止图片被挤压缩小 */
+    flex-shrink: 0;
+    border: 1px solid #e8e8e8;
+    box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.profile-photo:hover {
+    transform: scale(1.02);
+    box-shadow: 0 25px 45px -20px rgba(0, 0, 0, 0.15);
 }
 
 .profile-photo img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 核心：保持图片比例，不拉伸变形 */
-    object-position: center; /* 居中显示，裁剪多余部分 */
+    object-fit: cover;
+    object-position: center;
 }
 
-/* 鼠标悬浮效果（保留） */
-.profile-photo:hover {
-    transform: perspective(800px) rotateY(0deg) scale(1.05);
-    box-shadow: 0 0 40px rgba(0, 204, 255, 0.4);
-}
-
-/* Hero 文字区域 - 适配变长的文字 */
 .hero-text {
-    color: #fff;
-    text-align: left;
-    flex: 1; /* 文字区域自动占剩余空间 */
-    min-width: 300px; /* 最小宽度，防止文字挤太窄 */
+    flex: 1;
 }
 
 .hero-text h1 {
-    font-size: 3rem;
-    margin-bottom: 0.8rem;
-    background: linear-gradient(90deg, #00ccff, #9933ff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    font-size: 3.2rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #1a1a1a;
+    margin-bottom: 0.75rem;
+    background: none;
 }
 
-/* 新增：为指定文字添加渐变流光+闪烁特效 */
 .hero-text h2 {
-    font-size: 1.4rem; /* 适配变长的文字，调整字号 */
+    font-size: 1.2rem;
+    font-weight: 450;
+    color: #555;
     margin-bottom: 1rem;
-    line-height: 1.5; /* 增加行高，避免文字重叠 */
-    /* 核心特效：渐变文字 + 流光动画 */
-    background: linear-gradient(90deg, #00ccff, #9933ff, #00ccff);
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: glowFlow 8s linear infinite, subtleFlicker 3s ease-in-out infinite;
-}
-
-/* 流光动画：渐变背景横向滚动 */
-@keyframes glowFlow {
-    0% {
-        background-position: 0% 0%;
-    }
-    100% {
-        background-position: 200% 0%;
-    }
-}
-
-/* 轻微闪烁动画：不刺眼的透明度变化 */
-@keyframes subtleFlicker {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.95;
-    }
+    line-height: 1.4;
+    background: none;
+    animation: none;
 }
 
 .hero-text p {
-    font-size: 1.1rem;
+    font-size: 1rem;
+    color: #777;
     margin-bottom: 2rem;
-    color: #b0b0b0;
-    line-height: 1.6; /* 增加行高，提升可读性 */
+    line-height: 1.6;
 }
 
-/* 移动端适配（文字/图片自动堆叠） */
-@media (max-width: 768px) {
-    .hero-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 2rem;
-    }
-    .hero-text {
-        text-align: center;
-        min-width: 100%;
-    }
-    .hero-text h1 {
-        font-size: 2.2rem;
-    }
-    .hero-text h2 {
-        font-size: 1.2rem;
-        animation: glowFlow 6s linear infinite, subtleFlicker 3s ease-in-out infinite;
-    }
-    .profile-photo {
-        width: 220px;
-        height: 220px;
-    }
-}
-
-/* 按钮 - 渐变 + 3D hover */
 .btn {
     display: inline-block;
-    margin-top: 2rem;
-    padding: 0.9rem 2.2rem;
-    background: linear-gradient(90deg, #00ccff, #9933ff);
-    color: #fff;
-    border-radius: 8px;
+    padding: 0.85rem 2rem;
+    background: transparent;
+    color: #1a1a1a;
+    border: 1px solid #1a1a1a;
+    border-radius: 0;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
     transition: all 0.3s ease;
-    position: relative;
-    border: none;
-    box-shadow: 0 4px 15px rgba(0, 204, 255, 0.2);
-}
-
-.btn::after {
-    content: '';
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    right: -4px;
-    bottom: -4px;
-    background: linear-gradient(90deg, #9933ff, #00ccff);
-    border-radius: 8px;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.3s ease;
 }
 
 .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 204, 255, 0.3);
+    background: #1a1a1a;
+    color: #fff;
+    transform: none;
+    box-shadow: none;
 }
 
-.btn:hover::after {
-    opacity: 1;
+.hero-bg {
+    display: none;
 }
 
-/* Section - 滚动渐入动画 */
+/* ========== Section 通用样式 ========== */
 .section {
-    padding: 6rem 1rem;
+    padding: 5rem 0;
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.8s ease, transform 0.8s ease;
@@ -267,114 +186,75 @@ body {
 }
 
 .bg-dark {
-    background: #0a0a12;
-    position: relative;
+    background-color: #f7f7f9;
 }
 
-.bg-dark::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(0, 204, 255, 0.5), transparent);
-}
-
-.container {
-    width: 90%;
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-/* 标题 - 渐变 + 光效 */
 .section-title {
-    font-size: 2.2rem;
-    margin-bottom: 3rem;
-    text-align: center;
-    position: relative;
-    background: linear-gradient(90deg, #fff, #00ccff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    margin-bottom: 2.5rem;
+    text-align: left;
+    color: #1a1a1a;
+    background: none;
 }
 
 .section-title::after {
     content: '';
-    width: 80px;
-    height: 3px;
-    background: linear-gradient(90deg, #00ccff, #9933ff);
+    width: 40px;
+    height: 2px;
+    background: #1a1a1a;
     display: block;
-    margin: 1rem auto 0;
-    border-radius: 2px;
-    box-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
+    margin: 0.75rem 0 0;
+    border-radius: 0;
+    box-shadow: none;
 }
 
-/* About */
+/* ========== About ========== */
 .about-content {
-    max-width: 900px;
-    margin: 0 auto;
-    font-size: 1.05rem;
-    background: rgba(10, 10, 20, 0.5);
-    padding: 2rem;
-    border-radius: 12px;
-    border: 1px solid rgba(0, 204, 255, 0.1);
-    backdrop-filter: blur(5px);
+    max-width: 780px;
+    background: transparent;
+    padding: 0;
+    border: none;
 }
 
 .about-content p {
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.7;
 }
 
-/* 卡片 - 玻璃拟态 + 3D hover */
+/* ========== Education & Experience 卡片 ========== */
 .edu-card, .exp-card {
-    background: rgba(15, 15, 30, 0.6);
-    padding: 2rem;
-    border-radius: 12px;
-    margin-bottom: 2rem;
-    border: 1px solid rgba(0, 204, 255, 0.1);
-    backdrop-filter: blur(8px);
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
+    background: #ffffff;
+    padding: 1.8rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ebebeb;
+    border-radius: 0;
+    transition: all 0.25s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
-/* 卡片左侧渐变光条 */
-.edu-card::before, .exp-card::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 4px;
-    background: linear-gradient(180deg, #00ccff, #9933ff);
-    transition: width 0.3s ease;
-}
-
-/* 3D hover 效果 */
 .card-hover:hover {
-    transform: translateY(-8px) scale(1.01);
-    box-shadow: 
-        0 10px 30px rgba(0, 204, 255, 0.15),
-        0 0 20px rgba(153, 51, 255, 0.08);
-}
-
-.card-hover:hover::before {
-    width: 8px;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.08);
+    border-color: #d0d0d0;
 }
 
 .edu-card h3, .exp-card h3 {
-    color: #fff;
-    margin-bottom: 0.5rem;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.3rem;
 }
 
 .company, .period {
-    background: linear-gradient(90deg, #00ccff, #9933ff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-weight: 500;
+    background: none;
+    color: #888;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.3px;
     margin-bottom: 1rem;
 }
 
@@ -385,256 +265,263 @@ body {
 
 .exp-card li {
     position: relative;
-    padding-left: 1.5rem;
-    margin-bottom: 0.8rem;
+    padding-left: 1.2rem;
+    margin-bottom: 0.7rem;
+    font-size: 0.92rem;
+    color: #444;
+    line-height: 1.6;
 }
 
 .exp-card li::before {
-    content: '▸';
-    background: linear-gradient(90deg, #00ccff, #9933ff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    content: '—';
+    background: none;
+    color: #aaa;
     position: absolute;
     left: 0;
-    font-size: 1.2rem;
+    font-size: 0.9rem;
 }
 
-/* Skills Grid */
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 2rem;
-}
-
-.skill-box {
-    background: rgba(15, 15, 30, 0.6);
-    padding: 2rem;
-    border-radius: 12px;
-    text-align: center;
-    border: 1px solid rgba(0, 204, 255, 0.1);
-    backdrop-filter: blur(8px);
-    transition: all 0.4s ease;
-}
-
-.skill-box h3 {
-    background: linear-gradient(90deg, #00ccff, #9933ff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-}
-
-/* Contact */
-.contact-info {
-    text-align: center;
-    font-size: 1.1rem;
-    background: rgba(10, 10, 20, 0.5);
-    padding: 2rem;
-    border-radius: 12px;
-    border: 1px solid rgba(0, 204, 255, 0.1);
-    backdrop-filter: blur(5px);
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.contact-info p {
-    margin-bottom: 1rem;
-}
-
-.contact-info i {
-    background: linear-gradient(90deg, #00ccff, #9933ff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    margin-right: 0.8rem;
-    font-size: 1.2rem;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 2.5rem 1rem;
-    background: rgba(5, 5, 10, 0.8);
-    color: #888;
-    border-top: 1px solid rgba(0, 204, 255, 0.1);
-}
-
-/* Mobile 适配 */
-@media (max-width: 768px) {
-    .hero-content {
-        flex-direction: column;
-        gap: 1.5rem;
-        text-align: center;
-    }
-    .hero-text {
-        text-align: center;
-    }
-    .hero-text h1 {
-        font-size: 2.4rem;
-    }
-    .profile-photo {
-        width: 160px;
-        height: 160px;
-    }
-    .nav-menu {
-        gap: 1rem;
-    }
-    .section {
-        padding: 4rem 1rem;
-    }
-}
-
-/* Portfolio 板块样式 */
+/* ========== Portfolio 板块 - 基于你原有HTML结构 ========== */
 .portfolio-category {
-    margin-bottom: 4rem;
+    margin-bottom: 3.5rem;
 }
 
 .portfolio-category-title {
-    font-size: 1.5rem;
-    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #1a1a1a;
     margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
-    gap: 0.8rem;
+    gap: 0.6rem;
+    border-left: 2px solid #1a1a1a;
+    padding-left: 0.8rem;
 }
 
 .portfolio-category-title i {
-    background: linear-gradient(90deg, #00ccff, #9933ff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-size: 1.6rem;
+    background: none;
+    color: #1a1a1a;
+    font-size: 1rem;
 }
 
 .portfolio-subtitle {
-    font-size: 1.1rem;
-    color: #00ccff;
+    font-size: 0.8rem;
+    color: #888;
     margin: 1.5rem 0 1rem;
-    padding-left: 0.5rem;
-    border-left: 3px solid #00ccff;
+    padding-left: 0;
+    border-left: none;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
-/* 卡片式图片网格 */
+/* 统一网格布局 - 4列网格 */
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
 }
 
+/* 统一卡片样式 - 正方形 (1:1) */
 .portfolio-card {
-    background: rgba(15, 15, 30, 0.6);
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid rgba(0, 204, 255, 0.1);
-    transition: all 0.4s ease;
     position: relative;
-    cursor: pointer; /* 鼠标指针变为手型 */
-}
-
-.portfolio-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 10px 30px rgba(0, 204, 255, 0.15),
-                0 0 20px rgba(153, 51, 255, 0.08);
-    border-color: rgba(0, 204, 255, 0.3);
+    background: #ffffff;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #efefef;
+    transition: all 0.3s ease;
+    aspect-ratio: 1 / 1;
 }
 
 .portfolio-img {
     width: 100%;
-    height: 200px;
+    height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    object-position: center;
+    transition: transform 0.4s ease;
+    display: block;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.12);
+    border-color: #ddd;
 }
 
 .portfolio-card:hover .portfolio-img {
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
-/* 点击提示overlay */
+/* Hover 遮罩层 */
 .view-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 70%);
     padding: 0.8rem;
-    background: linear-gradient(transparent, rgba(0,0,0,0.7));
-    color: #fff;
-    font-size: 0.9rem;
     text-align: center;
     opacity: 0;
     transition: opacity 0.3s ease;
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+    color: white;
 }
 
 .portfolio-card:hover .view-overlay {
     opacity: 1;
 }
 
-/* 设计卡册左右排版 */
+/* ========== Brochure Design Works - 横版布局 ========== */
 .brochure-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
-    max-width: 100%;
-    margin: 0 auto;
 }
 
 .brochure-card {
-    background: rgba(15, 15, 30, 0.6);
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid rgba(0, 204, 255, 0.1);
-    transition: all 0.4s ease;
     position: relative;
-    cursor: pointer; /* 鼠标指针变为手型 */
-}
-
-.brochure-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 204, 255, 0.15);
-    border-color: rgba(0, 204, 255, 0.3);
+    background: #ffffff;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #efefef;
+    transition: all 0.3s ease;
+    /* 横版：16:9 比例，更符合画册展示习惯 */
+    aspect-ratio: 16 / 9;
 }
 
 .brochure-img {
     width: 100%;
-    height: auto;
-    max-height: 400px;
+    height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    object-position: center;
+    transition: transform 0.4s ease;
+}
+
+.brochure-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.12);
+    border-color: #ddd;
 }
 
 .brochure-card:hover .brochure-img {
-    transform: scale(1.03);
+    transform: scale(1.02);
 }
 
-/* 图片放大模态框样式 */
+.brochure-card .view-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 70%);
+    padding: 0.8rem;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 0.7rem;
+    color: white;
+}
+
+.brochure-card:hover .view-overlay {
+    opacity: 1;
+}
+
+/* ========== Skills ========== */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.skill-box {
+    background: #ffffff;
+    padding: 1.5rem;
+    border: 1px solid #ebebeb;
+    border-radius: 0;
+    text-align: left;
+    transition: all 0.25s ease;
+}
+
+.skill-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.08);
+    border-color: #d0d0d0;
+}
+
+.skill-box h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.75rem;
+    background: none;
+    letter-spacing: 0.5px;
+}
+
+.skill-box p {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* ========== Contact ========== */
+.contact-info {
+    text-align: left;
+    background: transparent;
+    padding: 0;
+    border: none;
+    max-width: 500px;
+}
+
+.contact-info p {
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+.contact-info i {
+    background: none;
+    color: #1a1a1a;
+    width: 28px;
+    margin-right: 0.5rem;
+}
+
+/* ========== Footer ========== */
+footer {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: #fafafa;
+    color: #aaa;
+    border-top: 1px solid #eee;
+    font-size: 0.75rem;
+}
+
+/* ========== 模态框 ========== */
 .modal {
-    display: none; /* 默认隐藏 */
+    display: none;
     position: fixed;
     z-index: 9999;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.9);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(8px);
 }
 
 .modal-content {
     margin: auto;
     display: block;
-    max-width: 90%;
-    max-height: 90vh;
-    border-radius: 8px;
-    animation: zoom 0.4s ease;
+    max-width: 85vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    animation: zoom 0.3s ease;
 }
 
 @keyframes zoom {
-    from {transform: scale(0)} 
-    to {transform: scale(1)}
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
 .close-modal {
@@ -643,44 +530,155 @@ footer {
     right: 35px;
     color: #fff;
     font-size: 40px;
-    font-weight: bold;
-    transition: 0.3s;
+    font-weight: normal;
     cursor: pointer;
+    transition: opacity 0.2s ease;
+    opacity: 0.7;
 }
 
 .close-modal:hover {
-    color: #00ccff;
+    opacity: 1;
 }
 
 .modal-caption {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
     text-align: center;
     color: #ccc;
     padding: 10px 0;
-    height: 50px;
-    font-size: 1.2rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
 }
 
-/* 移动端适配 */
-@media (max-width: 768px) {
+/* ========== 响应式 ========== */
+@media (max-width: 1000px) {
     .portfolio-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        grid-template-columns: repeat(3, 1fr);
     }
-    .portfolio-img {
-        height: 160px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem;
     }
+    
+    .nav-container {
+        padding: 0 1.5rem;
+    }
+    
+    .nav-menu {
+        gap: 1.2rem;
+    }
+    
+    .nav-link {
+        font-size: 0.75rem;
+    }
+    
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+    
+    .hero-text {
+        text-align: center;
+    }
+    
+    .section-title {
+        text-align: center;
+    }
+    
+    .section-title::after {
+        margin: 0.75rem auto 0;
+    }
+    
+    .profile-photo {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .hero-text h1 {
+        font-size: 2.2rem;
+    }
+    
+    .hero-text h2 {
+        font-size: 1rem;
+    }
+    
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    /* Brochure 横版在平板上的响应 */
     .brochure-container {
         grid-template-columns: 1fr;
+        max-width: 600px;
+        margin: 0 auto;
     }
-    .modal-content {
-        max-width: 95%;
+    
+    .brochure-card {
+        aspect-ratio: 16 / 9;
     }
+    
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .contact-info {
+        text-align: center;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-menu {
+        gap: 0.8rem;
+    }
+    
+    .nav-link {
+        font-size: 0.7rem;
+    }
+    
+    .logo {
+        font-size: 0.8rem;
+    }
+    
+    .section {
+        padding: 3rem 0;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+    }
+    
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .edu-card, .exp-card {
+        padding: 1.2rem;
+    }
+    
+    .portfolio-card {
+        aspect-ratio: 1 / 1;
+    }
+    
+    .brochure-card {
+        aspect-ratio: 16 / 9;
+    }
+    
     .close-modal {
         font-size: 30px;
         top: 15px;
-        right: 25px;
+        right: 20px;
     }
+}
+
+/* 平滑滚动 */
+html {
+    scroll-behavior: smooth;
 }
